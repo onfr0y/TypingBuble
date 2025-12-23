@@ -1,0 +1,117 @@
+.typing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    z-index: 10;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--backdrop-blur));
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.typing-box {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-align: left;
+    user-select: none;
+    min-height: 200px;
+    /* Preserve whitespace for word wrapping */
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.char {
+    position: relative;
+    transition: color 0.1s;
+}
+
+.char.correct {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.char.incorrect {
+    color: var(--error-color);
+    text-decoration: underline;
+}
+
+.char.active {
+    border-left: 2px solid var(--highlight-color);
+    margin-left: -2px;
+    /* Pull back to not offset layout */
+    animation: blink 1s infinite;
+}
+
+/* Add a pseudo element cursor instead of border-left to avoid layout shift? 
+   Actually margin-left -2px works mostly, but let's try a better cursor */
+.char.active::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 10%;
+    height: 80%;
+    width: 2px;
+    background-color: var(--highlight-color);
+    animation: blink 1s infinite;
+}
+
+/* Disable the border approach if using active::before */
+.char.active {
+    border-left: none;
+    margin-left: 0;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.instruction {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.stats-bar {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink-color);
+    background: rgba(255, 255, 255, 0.4);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+}
+
+.stat-item span {
+    color: var(--error-color);
+    /* Highlight with red ink */
+    font-weight: 700;
+    margin-left: 0.5rem;
+}

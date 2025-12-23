@@ -1,0 +1,66 @@
+.app-layout {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  /* Above bubbles? No, bubbles are z-index 50 fixed. But bubbles are pointer-events none. */
+}
+
+/* Ensure bubbles are Behind content if desired? 
+   No, bubbles usually float ON TOP for effect.
+   But if text is readable, bubbles behind is better?
+   Let's keep bubbles on top (z-index 50) as currently defined.
+*/
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: none;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: initial;
+  color: var(--ink-color);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+  letter-spacing: -1px;
+  position: relative;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background-color: var(--highlight-gold);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+}
